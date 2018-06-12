@@ -1,0 +1,20 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "semi": 0,
+    "comma-dangle": 0,
+    "no-unused-vars": 0,
+    "comma-spacing": 0,
+    "dot-notation": 0,
+    "quotes": 0,
+    "no-multi-spaces": 0,
+    "no-undef": 0,
+    "curly": 0,
+    "no-trailing-space": 0
+  }
+}

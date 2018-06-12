@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# Usage
+#
+#   ./ake build
+#   ./ake deploy
+#   ,/ake test
+
+set -x
+
+# Configuration
+NAME="freedom-speedtest"
+HOST="guten@box"
+
+get_deps() {
+  go get -v ./...
+}
+
+build() {
+  get_deps
+
+  mkdir -p dist
+  echo "> dist/$NAME"
+  sed -i "s/VERSION/$(cat VERSION)/" main.go
+  GOOS=linux GOARCH=amd64 go build -o dist/$NAME
+  rice append --exec dist/$NAME
+
+  cp misc/{*.{service,timer},install.sh} dist
+}
+
+deploy() {
+  build
+
+  scp -r dist/. $HOST:/app/$NAME-cmd/
+  ssh $HOST "cd /app/$NAME-cmd && ./install.sh"
+}
+
+test() {
+  go run *.go -f test/Speedtestfile "$@"
+}
+
+case "$1" in
+  "" ) ;; #go run *.go | tee output
+  test | t ) shift; test ;;
+  build | b ) build ;;
+  deploy ) deploy ;;
+esac

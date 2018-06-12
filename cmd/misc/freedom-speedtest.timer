@@ -1,0 +1,8 @@
+[Unit]
+Description=freedom-speedtest
+
+[Timer]
+OnCalendar=hourly
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=freedom-speedtest
+
+[Service]
+User=nobody
+ExecStart=/usr/bin/freedom-speedtest -o mongodb

@@ -1,0 +1,15 @@
+{
+  "predef": ["Note", "_", "$", "Router", "Meteor", "Template"],
+  "node": true,
+  "browser": true,
+  "asi": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "boss": true,
+  "evil": true,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "sub": true,
+  "esnext": true
+}

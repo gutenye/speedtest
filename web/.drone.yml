@@ -1,0 +1,14 @@
+image: danieldent/meteor
+branches: ['prod']
+env:
+  - bower_storage__packages=/root/.cache/bower/packages
+cache:
+  - /root/.meteor
+  - /root/.cache/bower/packages
+
+script:
+
+deploy:
+  bash:
+    script:
+      - ./ake deploy

@@ -1,0 +1,15 @@
+image: gutenye/go
+branches: ['prod']
+git:
+  path: github.com/sabersalv/freedom-speedtest-cmd
+env:
+  - GOPATH=/go:$GOPATH
+cache:
+  - /go
+
+script:
+
+deploy:
+  bash:
+    script:
+      - ./ake deploy

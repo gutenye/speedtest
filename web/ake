@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -x
+
+NAME="freedom-speedtest-web"
+HOST="guten@box"
+
+server() {
+  meteor
+}
+
+build() {
+   meteor build ../web-dist --directory --server localhost:2004
+   cp misc/{*.service,install.sh} ../web-dist/bundle
+}
+
+deploy() {
+  build
+
+  # build-ed file is r--r--r--, so need remove first
+  # ssh $HOST "rm -rf /app/$NAME"  # I need cache node_modules
+  chmod u+w -R ../web-dist/bundle
+  scp -r ../web-dist/bundle/. $HOST:/app/$NAME
+  ssh $HOST "cd /app/$NAME && ./install.sh"
+}
+
+
+case "$1" in
+  server | s ) server ;;
+  build | b ) build ;;
+  deploy | d ) deploy ;;
+  production ) MONGO_URL="mongodb://127.0.0.1:27017/freedom_speedtest" meteor ;;
+esac

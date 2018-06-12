@@ -1,0 +1,9 @@
+[Unit]
+Description=Freedom Speedtest Web Service
+
+[Service]
+Environment=ROOT_URL=http://localhost:2004 PORT=2004 MONGO_URL=mongodb://localhost:27017/freedom_speedtest
+ExecStart=/usr/bin/node /app/freedom-speedtest-web/main.js
+
+[Install]
+WantedBy=default.target
